@@ -5,25 +5,25 @@ const path = require('path');
 const { IncomingForm } = require('formidable');
 const cors = require('cors')
 
+const config = require("./config")
+
 const app = express();
 app.use(cors());
 
-const uploadPath = path.join(process.cwd(), 'drive', 'uploads');
+const uploadPath = path.join(process.cwd(), config.foldername, 'uploads');
 
 if (!fs.existsSync(uploadPath)) {
     fs.mkdirSync(uploadPath, { recursive: true });
-  }
+}
 
   
-// Serve static files from a custom folder
 app.use('/uploads', express.static(uploadPath));
 
 // Custom file upload handling
 app.post('/upload', (req, res) => {
   const form = new IncomingForm();
   form.uploadDir = uploadPath;
-  form.keepExtensions = false; // Do not rely on keepExtensions
-
+  form.keepExtensions = false; 
  try {
   form.parse(req, (err, fields, files) => {
     if (err) {
@@ -31,7 +31,6 @@ app.post('/upload', (req, res) => {
       return;
     }
 
-    // Handle file extensions manually
     const updatedFiles = Object.fromEntries(
       Object.entries(files).map(([field, fileArray]) => {
         const newFiles = Array.isArray(fileArray) ? fileArray : [fileArray];
@@ -56,7 +55,7 @@ app.post('/upload', (req, res) => {
  }
 });
 
-const port = 4000;
-app.listen(port, () => {
+
+app.listen(config.PORT, () => {
   console.log(`Drive Running on PORT: ${port}`);
 });
