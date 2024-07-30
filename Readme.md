@@ -16,6 +16,18 @@ node drive/server.js
 
 ### 1. `/upload`
 To upload files to the drive.
-Just send as Formdata. Rest will be handled and returns the file name to store in your db
+Just send as Formdata. Rest will be handled and returns the file name to store in your db.
+```ts
+const formData = new FormData();
+formData.append('folder','thumbs');
+formData.append('file', file);
+
+fetch('http://localhost:4000/upload', 
+{
+    method: 'POST',
+    body : formData
+});
+
+```
 
 
