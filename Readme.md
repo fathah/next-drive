@@ -3,7 +3,7 @@ An in-built file server for modern JS Apps
 
 
 ## Setup
-This is a light weight server to start with default `node_modules` folder of your existing project.
+This is a light weight upload server.
 
 1. Clone the repo to your existing project.
 2. Rename the folder as required Eg: drive
