@@ -7,7 +7,11 @@ This is a light weight server to start with default `node_modules` folder of you
 
 1. Clone the repo to your existing project.
 2. Rename the folder as required Eg: drive
-3. Run the server with command 
+3. Install Packages
+```
+npm i express formidable cors
+```
+4. Run the server with command 
 ```
 node drive/server.js
 ```
