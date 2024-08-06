@@ -1,35 +1,43 @@
-## NEXT Drive
+# NEXT DRIVE
 An in-built file server for modern JS Apps
 
 
 ## Setup
 This is a light weight upload server.
 
-1. Clone the repo to your existing project.
-2. Rename the folder as required Eg: drive
+1. Clone the repo.
+2. Setup `config.js` with foldername, PORT, API_KEY
+
+For better security use `.env` to store API_KEY
+
 3. Install Packages
 ```
-npm i express formidable cors
+npm install
 ```
-4. Run the server with command 
+4. Start the server 
 ```
-node drive/server.js
+npm run start
 ```
 
 ## API Endpoints
 
-### 1. `/upload`
+### 1. `/upload/{foldername}`
 To upload files to the drive.
 Just send as Formdata. Rest will be handled and returns the file name to store in your db.
 ```ts
 const formData = new FormData();
-formData.append('folder','thumbs');
-formData.append('file', file);
+formData.append('files', file);
 
-fetch('http://localhost:4000/upload', 
+
+fetch('http://localhost:4000/upload/{foldername}', 
 {
     method: 'POST',
-    body : formData
+    body : formData,
+    {
+        headers : {
+            'X-API-KEY' : 'API_KEY_ADDED_IN_CONFIG.JS'
+        }
+    }
 });
 
 ```

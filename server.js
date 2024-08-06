@@ -23,7 +23,11 @@ app.use('/uploads', express.static(rootPath));
 app.post('/upload/:folder', (req, res) => {
   
 const folder = req.params.folder;
+const api = req.headers["x-api-key"];
 
+if(api !== config.API_KEY){
+  return res.status(400).json({success:true, error:"Unauthorized Access"});
+}
   if(!folder){
     return res.status(400).json({success:true, error:"Please provide a folder name"});
   }
